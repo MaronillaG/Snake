@@ -4,6 +4,7 @@ import { outsideGrid } from './grid.js'
 
 let lastRenderTime = 0; 
 let gameOver = false; // when true game terminates.
+let startMsg = document.getElementById('start-msg');
 let modalContainer = document.getElementById('modal-container'); // popup GMAE OVER
 let closeBtn = document.getElementById('close-btn'); // the x = close modal
 let body = document.querySelector('body');
@@ -45,7 +46,13 @@ function checkDeath() {
     gameOver = outsideGrid(getSnakeHead()) || snakeIntersection();
 }
 
+
+function firstKeyPress(event) {
+    document.removeEventListener('keydown', firstKeyPress);
+    startMsg.style.display = 'none';
+}
 // Event Listeners
+document.addEventListener('keydown', firstKeyPress);
 
 closeBtn.addEventListener('click', function() {
     modalContainer.style.display = 'none';
