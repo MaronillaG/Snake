@@ -5,69 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
-    <style>
-        body{
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            background-color: black;
-        }
-
-        #game-stats {
-            display: flex;
-            gap: 50px;
-            color: white;
-            font-family: sans-serif;
-            margin: 0 auto;
-        }
-
-        #game-area {
-            background-color: pink;
-            width:100vmin;
-            height:100vmin; 
-            display: grid;  
-            grid-template-rows: repeat(21, 1fr);
-            grid-template-columns: repeat(21, 1fr);
-        }
-
-        .snake {
-            background-color: cyan;
-            border: .25vmin solid black;
-        }
-
-        .food {
-            background-color: hsl(50, 100%, 50%);
-            border: .25vmin solid black;
-        }
-
-        .modal{
-            background: white;
-        }
-
-        #restart-btn{ 
-            background: pink;
-            border-radius: 10px;
-            border-color: black;
-            box-shadow: 5px 5px 5px grey;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script src="game.js"  type="module"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="game-stats">
-        <p>Score:  </p>
-    </div>
     <div id="game-area"></div>
-    <dialog open id="game-over-message" class="modal">
-        <p> GAME OVER </p>
-        <p> Your Score:  </p>
-        <div id="restart-btn">Play Again</div>
-        <div id="close-btn">&times;</div>
-    </dialog>
+    <div id="modal-container">
+        <div id="modal">
+            <p> GAME OVER </p>
+            <div id="restart-btn">Play Again</div>
+            <div id="close-btn">&times;
+        </div>
+    </div>
+    </div>
 </body>
 </html>

@@ -1,28 +1,26 @@
-// animation loop for game.
 import { update as updateSnake, draw as drawSnake, SNAKE_SPEED, getSnakeHead, snakeIntersection } from './snake.js'
-
 import { update as updateFood, draw as drawFood} from './food.js'
-
-import {outsideGrid} from './grid.js'
+import { outsideGrid } from './grid.js'
 
 let lastRenderTime = 0; 
-const gameArea = document.getElementById('game-area');
 let gameOver = false; // when true game terminates.
+let modalContainer = document.getElementById('modal-container'); // popup GMAE OVER
+let closeBtn = document.getElementById('close-btn'); // the x = close modal
+let body = document.querySelector('body');
+const gameArea = document.getElementById('game-area');
+let replay = document.getElementById('restart-btn');  // button for new game = refresh
 
 //paint function keeps running till gameover
 function paint(currentTime) {
    if (gameOver) {
-    if (confirm('You lost. Press ok to restart. ')) {
-        window.location = '/';
+       modalContainer.style.display = 'block';
+       return;
     }
-    return;
-   }
 
-   window.requestAnimationFrame(paint);
-   const secondsSinceLastRender = (currentTime - lastRenderTime ) / 1000;
-   if (secondsSinceLastRender < 1 / SNAKE_SPEED) return
-    
-    
+    window.requestAnimationFrame(paint);
+    const secondsSinceLastRender = (currentTime - lastRenderTime ) / 1000;
+    if (secondsSinceLastRender < 1 / SNAKE_SPEED) return
+
     console.log('Render')
     lastRenderTime = currentTime
 
@@ -35,7 +33,7 @@ window.requestAnimationFrame(paint); // starts the loop
 function update() {
     updateSnake();
     updateFood();
-    isGameOver();
+    checkDeath();
 }
 
 function draw () {
@@ -43,10 +41,18 @@ function draw () {
     drawFood(gameArea);
 }
 
-function isGameOver() {
+function checkDeath() {
     gameOver = outsideGrid(getSnakeHead()) || snakeIntersection();
 }
 
-const modal = document.getElementById("game-over-message");
-const openModal = document.querySelector
-const closeModal = document.getElementById("close-btn");
+// Event Listeners
+
+closeBtn.addEventListener('click', function() {
+    modalContainer.style.display = 'none';
+})
+
+
+replay.addEventListener('click', function() {
+    modalContainer.style.display = 'none';
+    window.location.reload();
+})
